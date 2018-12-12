@@ -47,7 +47,11 @@ public class GestionBD {
         db.getCollection(collection).deleteOne(bson);
     }
     
-    public void afficherCollection(){
+    public void rechercheDocument(String collection, Bson b){
+        db.getCollection(collection).find(b);
+    }
+    
+    private void afficherCollection(){
         // Affichage de la liste des collections de la base
         for (String name : db.listCollectionNames()) { 
             System.out.println(name); 
