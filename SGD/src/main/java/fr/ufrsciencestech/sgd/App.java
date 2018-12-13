@@ -1,7 +1,9 @@
 package fr.ufrsciencestech.sgd;
 
+import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.*;
 import fr.ufrsciencestech.sgd.modele.*;
+import fr.ufrsciencestech.sgd.vueControleur.*;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -13,19 +15,27 @@ public class App
 {
     public static void main( String[] args )
     {
-        GestionBD cbd = new GestionBD("tf872254");
+        GestionBD gbd = new GestionBD("tf872254");
         
-        Document d = new Document("nom", "Coucou").append("prenom", "je").append("ville", "m'emmerde");
+        RechercheUtilisateur ru = new RechercheUtilisateur(gbd);
         
-        //cbd.insertionBD("utilisateur", d);
-        cbd.suppressionDocument("utilisateur", eq("nom", "Coucou"));
+        ru.setVisible(true);
         
-        Bson a = eq("nom", "test");
+        //Document d = new Document("nom", "Coucou").append("prenom", "je").append("ville", "m'emmerde");
         
-        Bson b = gte("year", 2014);
+        //gbd.insertionBD("utilisateur", d);
+        //gbd.suppressionDocument("utilisateur", eq("nom", "Coucou"));
         
-        Bson c = and(a,b);
+        //Bson a = eq("nom", "Coucou");
         
-        cbd.rechercheDocument("utilisateur", c);
+        //Bson b = gte("year", 2011);
+        
+        //Bson c = or(a,b);
+        
+        /*mc = gbd.rechercheDocument("utilisateur", a);
+        
+        while(mc.hasNext()){
+            System.out.println(mc.next());
+        }*/
     }
 }

@@ -8,6 +8,7 @@ package fr.ufrsciencestech.sgd.modele;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class GestionBD {
         id = idC;
         
         initConnexion();
+    }
+    
+    public MongoDatabase getDB(){
+        return this.db;
     }
     
     private void initConnexion(){
@@ -47,11 +52,13 @@ public class GestionBD {
         db.getCollection(collection).deleteOne(bson);
     }
     
-    public void rechercheDocument(String collection, Bson b){
-        db.getCollection(collection).find(b);
+    public MongoCursor rechercheDocument(String collection, Bson b){
+        return db.getCollection(collection).find(b).iterator();
     }
+
     
-    private void afficherCollection(){
+    
+    public void afficherCollection(){
         // Affichage de la liste des collections de la base
         for (String name : db.listCollectionNames()) { 
             System.out.println(name); 

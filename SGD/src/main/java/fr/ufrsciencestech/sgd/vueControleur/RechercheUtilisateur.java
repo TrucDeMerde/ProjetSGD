@@ -5,17 +5,32 @@
  */
 package fr.ufrsciencestech.sgd.vueControleur;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.*;
+import fr.ufrsciencestech.sgd.modele.GestionBD;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
 /**
  *
  * @author tf872254
  */
 public class RechercheUtilisateur extends javax.swing.JFrame {
 
+    GestionBD gbd;
+    
     /**
      * Creates new form RechercheUtilisateur
      */
-    public RechercheUtilisateur() {
+    public RechercheUtilisateur(GestionBD g) {
         initComponents();
+        gbd = g;
+        
+        
     }
 
     /**
@@ -32,6 +47,8 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jComboBox7 = new javax.swing.JComboBox<>();
         jPanel9 = new javax.swing.JPanel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -74,35 +91,47 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.setLayout(new java.awt.GridLayout(6, 0, 0, 5));
 
-        jPanel8.setLayout(new java.awt.GridBagLayout());
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 101;
-        gridBagConstraints.ipady = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
-        jPanel8.add(jComboBox1, gridBagConstraints);
-
-        jTextField1.setText("jTextField1");
-        jTextField1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                recherche(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 185;
-        gridBagConstraints.ipady = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 12);
-        jPanel8.add(jTextField1, gridBagConstraints);
+
+        jButton2.setText("pute");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
+        jComboBox7.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox7, 0, 182, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1)
+                    .addComponent(jTextField1)
+                    .addComponent(jComboBox7)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+        );
 
         jPanel4.add(jPanel8);
 
@@ -136,7 +165,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel9.add(jRadioButton4, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -145,8 +174,6 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         jPanel9.add(jComboBox2, gridBagConstraints);
-
-        jTextField2.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -188,7 +215,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel10.add(jRadioButton6, gridBagConstraints);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -197,8 +224,6 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         jPanel10.add(jComboBox3, gridBagConstraints);
-
-        jTextField3.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -240,7 +265,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel11.add(jRadioButton8, gridBagConstraints);
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -249,8 +274,6 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         jPanel11.add(jComboBox4, gridBagConstraints);
-
-        jTextField4.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -292,7 +315,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel12.add(jRadioButton10, gridBagConstraints);
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -301,8 +324,6 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         jPanel12.add(jComboBox5, gridBagConstraints);
-
-        jTextField5.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -344,7 +365,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel13.add(jRadioButton12, gridBagConstraints);
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -353,8 +374,6 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         jPanel13.add(jComboBox6, gridBagConstraints);
-
-        jTextField6.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -366,11 +385,6 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
 
         jPanel4.add(jPanel13);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jList1);
 
         jTextArea1.setColumns(20);
@@ -412,47 +426,90 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void recherche(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_recherche
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recherche
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RechercheUtilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RechercheUtilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RechercheUtilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RechercheUtilisateur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RechercheUtilisateur().setVisible(true);
-            }
-        });
+    private ArrayList<String>rechercheList(String name){
+        ArrayList<String> list = new ArrayList<String>();
+        return list;
     }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String categorie = this.jComboBox1.getSelectedItem().toString();
+        MongoCursor mc = null;
+        
+
+        if(!categorie.contains("note")) {
+            //if (categorie.equals("date de parution")) categorie = "dateSortie";
+            switch(categorie){
+                case "nom":
+                    mc = gbd.rechercheDocument("jeuxvideo", where("this.nom.contains(\""+this.jTextField1.getText()+"\");"));
+                    break;
+                case "categorie":
+                    mc = gbd.rechercheDocument("jeuxvideo", eq(categorie, this.jComboBox7.getSelectedItem()));
+                    break;
+                case "serie":
+                    mc = gbd.rechercheDocument("jeuxvideo", ne("serie", null));                    
+                    break;
+                case "pegi":
+                    mc = gbd.rechercheDocument("jeuxvideo", where("this.pegi.contains(\""+this.jTextField1.getText()+"\");"));
+                    break;
+            }
+        }
+        else if(categorie.contains("<") ){
+            categorie = "note";
+            try{
+                int i = Integer.parseInt(this.jTextField1.getText());
+                mc = gbd.rechercheDocument("jeuxvideo", lt(categorie, i));
+            } catch(NumberFormatException nfe){
+                JOptionPane.showMessageDialog(null, nfe.getMessage());
+            }
+        }
+        else if(categorie.contains(">") ){
+            categorie = "note";
+            try{
+                int i = Integer.parseInt(this.jTextField1.getText());
+                mc = gbd.rechercheDocument("jeuxvideo", gt(categorie, i));
+            } catch(NumberFormatException nfe){
+                JOptionPane.showMessageDialog(null, nfe.getMessage());
+            }
+        }
+        else if(categorie.contains("=") ){
+            categorie = "note";
+            try{
+                int i = Integer.parseInt(this.jTextField1.getText());
+                mc = gbd.rechercheDocument("jeuxvideo", eq(categorie, i));
+            } catch(NumberFormatException nfe){
+                JOptionPane.showMessageDialog(null, nfe.getMessage());
+            }
+        }
+        
+        String text = "", tmp = "";
+        while(mc.hasNext()){
+            if(categorie.equals("serie")){
+                Document result = (Document) mc.next();
+                Document target = (Document) result.get("serie");
+                tmp = (String) target.get("nom");
+                if(tmp.contains(this.jTextField1.getText())) text += result.toJson() + "\n";
+            }else{
+                text += mc.next().toString()+"\n";                
+            }
+        }
+        this.jTextArea1.setText(text);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        if(this.jComboBox1.getSelectedItem().equals("categorie")){
+            this.jComboBox7.setEnabled(true);
+            this.jTextField1.setEnabled(false);
+        }
+        else{
+            this.jComboBox7.setEnabled(false);
+            this.jTextField1.setEnabled(true);
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -464,6 +521,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
