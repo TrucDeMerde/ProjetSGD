@@ -151,7 +151,7 @@ public class Modele extends Observable{
         String tmp = "";
         ArrayList<String> alCat;
         ArrayList<Document> alAvis;
-        float f, somme = 0, moyenne;
+        double f, somme = 0, moyenne;
         int nbNotes = 0;
         
         while(mc.hasNext()){
@@ -173,8 +173,8 @@ public class Modele extends Observable{
                 Document docUser = (Document) avis.get("utilisateur");
                 tmp += "Avis de " + (String) docUser.get("pseudo") + ": \n\t\t";
                 tmp += (String) avis.get("commentaire") + "\n\t\t";
-                tmp += "Note de l'utilisateur: " + (String) avis.get("note") + "\n\t";
-                f = Float.parseFloat((String) avis.get("note"));
+                tmp += "Note de l'utilisateur: " + String.format("%.1f", avis.get("note")) + "\n\t";
+                f = (double) avis.get("note");
                 somme += f;
                 nbNotes++;
             }
@@ -223,4 +223,8 @@ public class Modele extends Observable{
         this.setChanged();
         this.notifyObservers();        
     }    
+
+    public void ajouterAvis(String jeu, float note, String avis, String pseudo, String mail) {
+        this.gbd.miseAJour("jeuxvideo", jeu, note, avis, pseudo, mail);
+    }
 }

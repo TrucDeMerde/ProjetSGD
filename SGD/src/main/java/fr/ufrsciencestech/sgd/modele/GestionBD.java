@@ -10,6 +10,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.Arrays;
 import java.util.ArrayList;
 import org.bson.Document;
@@ -63,5 +64,16 @@ public class GestionBD {
         for (String name : db.listCollectionNames()) { 
             System.out.println(name); 
         }
+    }
+
+    void miseAJour(String collection, String jeu, float note, String avis, String pseudo, String mail) {
+        //Document d = db.getCollection("jeuxvideo").find(eq("nom", jeu)).first();
+        Document docUser = new Document("pseudo", pseudo).append("mail", mail);
+        //Document docAAjouter = new Document("note", note).append("commentaire", avis).append("utilisateur", docUser);
+        Document docAvis = new Document("note", note).append("commentaire", avis).append("utilisateur", docUser);
+        Document docAAjouter = new Document("$addToSet", new Document("avis", docAvis));
+        db.getCollection("jeuxvideo").updateOne(eq("nom", jeu), docAAjouter);
+        //doc.replace("avis", ald);
+        //this.insertionBD("jeuxvideo", doc);
     }
 }
