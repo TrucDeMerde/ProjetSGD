@@ -5,9 +5,14 @@
  */
 package fr.ufrsciencestech.sgd.modele;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.MapReduceCommand;
+import com.mongodb.MapReduceCommand.OutputType;
+import com.mongodb.MapReduceOutput;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.MapReduceIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
@@ -38,7 +43,7 @@ public class GestionBD {
         pass = id.toCharArray();
         MongoCredential credential = MongoCredential.createCredential(id, id, pass);
         MongoClient client = new MongoClient(new ServerAddress("mongo", 27017), Arrays.asList(credential));
-        db= client.getDatabase(id);        
+        db= client.getDatabase(id);      
     }
     
     public void insertionBD(String collection, Document d){
@@ -57,14 +62,22 @@ public class GestionBD {
         return db.getCollection(collection).find(b).iterator();
     }
 
-    public double mapReduce(){
-        double moyenne = 0;
+    public MapReduceIterable mapReduce(){
 
         String funcMap =    "function(){" + 
-                            "";
+                            "var s = this.serie;" +
+                            "emit(s, 1);}";
                             
-
-        return moyenne;
+        String funcReduce = "function(key, values){" +
+                            "var sum = 0;" +
+                            "values.forEach( function(doc){sum += 1;});" +
+                            "return sum;}";
+        
+        //BasicDBObject query = new BasicDBObject("serie", new BasicDBObject("$exist",1));
+        
+        //MapReduceCommand cmd = new MapReduceCommand(db.getCollection("jeuxvideo"), funcMap, funcReduce,"Series", OutputType.INLINE, query);
+        
+        return db.getCollection("jeuxvideo").mapReduce(funcMap,funcReduce);
     }
     
     public void afficherCollection(){

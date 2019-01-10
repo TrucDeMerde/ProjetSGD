@@ -5,6 +5,7 @@
  */
 package fr.ufrsciencestech.sgd.vueControleur;
 
+import com.mongodb.client.MapReduceIterable;
 import fr.ufrsciencestech.sgd.modele.*;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -46,6 +47,16 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         this.jList1.clearSelection();
         
         this.setVisible(true);
+        
+        String text = "";
+        
+        MapReduceIterable mri = m.getBD().mapReduce();
+        
+        while(mri.iterator().hasNext()){
+            text += mri.iterator().next().toString() + "\n";        
+        }
+        
+        this.jTextArea1.setText(text);
     }
 
     /**
