@@ -6,6 +6,8 @@
 package fr.ufrsciencestech.sgd.vueControleur;
 
 import com.mongodb.client.MapReduceIterable;
+import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.gt;
 import fr.ufrsciencestech.sgd.modele.*;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.bson.Document;
 
 /**
  *
@@ -48,13 +51,23 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         
         this.setVisible(true);
         
+        double nbJI = 0;
+        int i = 0;
         String text = "";
-        
-        MapReduceIterable mri = m.getBD().mapReduce();
-        
-        while(mri.iterator().hasNext()){
-            text += mri.iterator().next().toString() + "\n";        
+        MongoCursor mc = m.getBD().rechercheDocument("Series",gt("value",0));
+        while(mc.hasNext()){
+            Document temp = (Document) mc.next();
+            Document res = (Document) temp.get("_id");
+            
+            if(res==null){
+                nbJI = (double) temp.get("value");
+                i = (int)nbJI ;
+            }
+            else{
+                text += ((String) res.get("nom")) + " --- " + ((int)((double) temp.get("value"))) + " jeu(x) \n";
+            }
         }
+        text += "Il y a aussi " + i + " jeux indépendants.";
         
         this.jTextArea1.setText(text);
     }

@@ -8,6 +8,7 @@ package fr.ufrsciencestech.sgd.modele;
 import com.mongodb.client.MapReduceIterable;
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.ne;
 import static com.mongodb.client.model.Filters.where;
 import java.util.ArrayList;
@@ -30,25 +31,9 @@ public class Modele extends Observable{
     public Modele(GestionBD g){
         gbd = g;
         listeJeux = new ArrayList();
+
         
-        
-        int nbJI = 0;
-        String text = "";
-        MongoCursor mc = gbd.rechercheDocument("Series",null);
-        while(mc.hasNext()){
-            Document temp = (Document) mc.next();
-            Document res = (Document) temp.get("_id");
-            
-            if(res==null){
-                nbJI = (int) temp.get("value");
-            }
-            else{
-                text += ((String) res.get("nom")) + " --- " + ((String) res.get("value")) + " jeu(x) \n";
-            }
-        }
-        text += "Il y a aussi " + nbJI + "jeux indépendants.";
-        
-        zoneDeTexte = text;
+        zoneDeTexte = "";
     }
     
     public void setZoneDeTexte(String s){
@@ -199,6 +184,7 @@ public class Modele extends Observable{
             }
             moyenne = (nbNotes > 0)? somme/nbNotes : -1;
             tmp += (moyenne >= 0)? "Note moyenne: " + moyenne + "\n\t" : "Pas d'avis disponible";     
+            
         }
         
         this.zoneDeTexte = tmp;
