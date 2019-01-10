@@ -57,7 +57,15 @@ public class GestionBD {
         return db.getCollection(collection).find(b).iterator();
     }
 
-    
+    public double mapReduce(){
+        double moyenne = 0;
+
+        String funcMap =    "function(){" + 
+                            "";
+                            
+
+        return moyenne;
+    }
     
     public void afficherCollection(){
         // Affichage de la liste des collections de la base

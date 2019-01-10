@@ -178,7 +178,7 @@ public class Modele extends Observable{
                 somme += f;
                 nbNotes++;
             }
-            moyenne = (nbNotes > 0)? somme/nbNotes : -1;
+            moyenne = 0;
             tmp += (moyenne >= 0)? "Note moyenne: " + moyenne + "\n\t" : "Pas d'avis disponible";     
         }
         
