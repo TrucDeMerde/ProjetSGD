@@ -7,6 +7,7 @@ package fr.ufrsciencestech.sgd.vueControleur;
 
 import fr.ufrsciencestech.sgd.modele.GestionBD;
 import fr.ufrsciencestech.sgd.modele.Modele;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,17 +16,12 @@ import fr.ufrsciencestech.sgd.modele.Modele;
 public class Connexion extends javax.swing.JFrame{
 
     private GestionBD gbd = new GestionBD("tf872254");
-        
-    private Modele m = new Modele(gbd);
-        
-    private RechercheUtilisateur ru = new RechercheUtilisateur(m);
     
     /**
      * Creates new form Connexion
      */
     public Connexion() {
         initComponents();
-        ru.setVisible(false);
     }
 
     /**
@@ -111,9 +107,12 @@ public class Connexion extends javax.swing.JFrame{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(this.jTextField1.getText().equals("tibo") && this.jTextField2.getText().equals("12.")){
-            ru.setVisible(true);
+            Admin tmp = new Admin(gbd);
+            tmp.setVisible(true);
             this.setVisible(false);
         }
+        else JOptionPane.showMessageDialog(this, "Mauvais identifiants");
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

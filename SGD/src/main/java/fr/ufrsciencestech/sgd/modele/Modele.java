@@ -232,4 +232,17 @@ public class Modele extends Observable{
     public void ajouterAvis(String jeu, float note, String avis, String pseudo, String mail) {
         this.gbd.miseAJour("jeuxvideo", jeu, note, avis, pseudo, mail);
     }
+
+    public void aggregateAvis() {
+        this.zoneDeTexte = gbd.aggregateAvis();
+        this.setChanged();
+        this.notifyObservers();  
+    }
+
+    public void aggregateNote() {
+        this.zoneDeTexte = gbd.aggregateNote();
+        this.setChanged();
+        this.notifyObservers();     
+    }
+    
 }

@@ -11,9 +11,13 @@ public class App
 {
     public static void main( String[] args )
     {
-        Connexion c = new Connexion();
+        GestionBD gbd = new GestionBD("tf872254");
         
-        c.setVisible(true);
+        Modele m = new Modele(gbd);
+    
+        RechercheUtilisateur ru = new RechercheUtilisateur(m);
+        
+        ru.setVisible(true);
                 
     }
 }

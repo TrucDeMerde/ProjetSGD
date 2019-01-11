@@ -9,6 +9,8 @@ import com.mongodb.client.MapReduceIterable;
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.gt;
 import fr.ufrsciencestech.sgd.modele.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -30,7 +32,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
     private Modele m;
     private boolean[] criteres = new boolean[6];
     private String[] conditions = new String[5];
-    private String avis = "", jeu = "", pseudo = "tibo", mail = "tibo@tibolebg.gouv";
+    private String avis = "", jeu = "", pseudo = "", mail = "";
     private float note = -1;
     
     /**
@@ -133,6 +135,9 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -612,17 +617,44 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
             }
         });
 
+        jButton3.setText("Insertion jeu");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Nb avis");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Moyennes jeux");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -638,7 +670,11 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton1)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5))))
                 .addContainerGap())
         );
 
@@ -927,24 +963,49 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
             JOptionPane.showMessageDialog(this, "Pas de jeu sélectionné");
         }else{
             JPanel jp = new JPanel();
+            jp.setLayout(new BorderLayout());
+            
+            JPanel top = new JPanel();
+            jp.add(top,BorderLayout.NORTH);
+            
+            JPanel g = new JPanel();
+            g.setLayout(new GridLayout(16,1));
+            jp.add(g,BorderLayout.WEST);
+            
+            JPanel middle = new JPanel();
+            jp.add(middle,BorderLayout.CENTER);
+            
             
             JLabel jl = new JLabel();
             jl.setText("Note:");
             JTextField jnote = new JTextField(10);
+            JLabel jl3 = new JLabel();
+            jl3.setText("Pseudo:");
+            JTextField jpseudo = new JTextField(10);
+            JLabel jl4 = new JLabel();
+            jl4.setText("Mail:");
+            JTextField jmail = new JTextField(10);
             JLabel jl2 = new JLabel();
             jl2.setText("Avis:");
             JTextArea javis = new JTextArea(30,30);
             
             
-            jp.add(jl);
-            jp.add(jnote);
-            jp.add(jl2);
-            jp.add(javis);
+            top.add(jl);
+            top.add(jnote);
+            middle.add(jl2);
+            middle.add(javis);
+            g.add(jl3);
+            g.add(jpseudo);
+            g.add(jl4);
+            g.add(jmail);
             
             int result = JOptionPane.showConfirmDialog(null, jp, "Ajout avis", JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
                 this.note = (NumberUtils.isNumber(jnote.getText()))? Float.parseFloat(jnote.getText()) : -1;
                 this.avis = javis.getText();
+                this.pseudo = jpseudo.getText();
+                this.mail = jmail.getText();
+                
             }
             
             if(note != -1){
@@ -993,6 +1054,20 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         conditions[5] = "ou";
     }//GEN-LAST:event_jRadioButton12ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Connexion c = new Connexion();
+        c.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        m.aggregateAvis();
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        m.aggregateNote();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1002,6 +1077,9 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
