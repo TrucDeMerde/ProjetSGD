@@ -170,7 +170,7 @@ public class Modele extends Observable{
             for(String s: alCat){
                 tmp += s + " - ";
             }            
-            tmp += "\n\tPEGI: " + (String) d.get("pegi") + "\n\t";
+            tmp += "\n\tPEGI: " +  d.get("pegi") + "\n\t";
             
             alAvis = (d.get("avis") != null)? (ArrayList) d.get("avis") : new ArrayList();
             for (Document avis : alAvis) {

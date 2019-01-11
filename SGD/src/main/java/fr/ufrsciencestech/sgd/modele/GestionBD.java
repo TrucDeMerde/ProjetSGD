@@ -77,9 +77,6 @@ public class GestionBD {
                             "values.forEach( function(doc){sum += 1;});" +
                             "return sum;}";
         
-        //BasicDBObject query = new BasicDBObject("serie", new BasicDBObject("$exist",1));
-        
-        //MapReduceCommand cmd = new MapReduceCommand(db.getCollection("jeuxvideo"), funcMap, funcReduce,"Series", OutputType.INLINE, query);
         
         return db.getCollection("jeuxvideo").mapReduce(funcMap,funcReduce);
     }
