@@ -70,7 +70,10 @@ public class Modele extends Observable{
                     mc = gbd.rechercheDocument("jeuxvideo", ne("serie", null));                    
                     break;
                 case "pegi":
-                    mc = gbd.rechercheDocument("jeuxvideo", where("this.pegi.contains(\""+query+"\");"));
+                    mc = gbd.rechercheDocument("jeuxvideo", eq(categorie, query));
+                    break;
+                case "disponibilite":
+                    mc = gbd.rechercheDocument("jeuxvideo", eq(categorie, query));
                     break;
             }
         }
@@ -106,7 +109,7 @@ public class Modele extends Observable{
                         Document avis = (Document) mc.next();
                         ArrayList<Document> alNote = (avis != null)? (ArrayList)avis.get("avis"): new ArrayList();
                         for(Document doc: alNote){
-                            somme += Float.parseFloat((String) doc.get("note"));
+                            somme += Float.parseFloat(""+ doc.get("note"));
                             nb++;
                         }
 
