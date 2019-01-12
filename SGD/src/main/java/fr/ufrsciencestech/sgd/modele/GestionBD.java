@@ -6,6 +6,7 @@
 package fr.ufrsciencestech.sgd.modele;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 import com.mongodb.MapReduceCommand;
 import com.mongodb.MapReduceCommand.OutputType;
 import com.mongodb.MapReduceOutput;
@@ -66,7 +67,7 @@ public class GestionBD {
         return db.getCollection(collection).find(b).iterator();
     }
 
-    public MapReduceIterable mapReduce(){
+    public MongoCursor mapReduce(){
 
         String funcMap =    "function(){" + 
                             "var s = this.serie;" +
@@ -77,8 +78,10 @@ public class GestionBD {
                             "values.forEach( function(doc){sum += 1;});" +
                             "return sum;}";
         
+        MapReduceIterable mri = db.getCollection("jeuxvideo").mapReduce(funcMap, funcReduce);
+        MongoCursor tmp = mri.iterator();
         
-        return db.getCollection("jeuxvideo").mapReduce(funcMap,funcReduce);
+        return tmp;
     }
     
     public String aggregateAvis(){
@@ -109,12 +112,9 @@ public class GestionBD {
         String group = "{$group:{_id:\"$nom\",avg :{$avg:\"$avis.note\"}}}";
         String sort = "{$sort :{\"avg\" : -1}}";
         
-        
-        
         Document ud = Document.parse(unwind);
         Document gd = Document.parse(group);
         Document sd = Document.parse(sort);
-        
         
         AggregateIterable<Document> result = db.getCollection("jeuxvideo").aggregate(Arrays.asList(ud,gd,sd));
         MongoCursor<Document> mc = result.iterator();

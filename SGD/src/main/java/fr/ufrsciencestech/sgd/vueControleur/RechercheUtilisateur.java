@@ -56,7 +56,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         double nbJI = 0;
         int i = 0;
         String text = "";
-        MongoCursor mc = m.getBD().rechercheDocument("Series",gt("value",0));
+        MongoCursor mc = m.getBD().mapReduce();//
         while(mc.hasNext()){
             Document temp = (Document) mc.next();
             Document res = (Document) temp.get("_id");
