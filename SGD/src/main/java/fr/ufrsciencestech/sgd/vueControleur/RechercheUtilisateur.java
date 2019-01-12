@@ -91,47 +91,47 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         buttonGroup5 = new javax.swing.ButtonGroup();
         jPanel4 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBox7 = new javax.swing.JComboBox<String>();
         jPanel9 = new javax.swing.JPanel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox8 = new javax.swing.JComboBox<>();
+        jComboBox8 = new javax.swing.JComboBox<String>();
         jPanel10 = new javax.swing.JPanel();
         jCheckBox3 = new javax.swing.JCheckBox();
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
         jTextField3 = new javax.swing.JTextField();
-        jComboBox9 = new javax.swing.JComboBox<>();
+        jComboBox9 = new javax.swing.JComboBox<String>();
         jPanel11 = new javax.swing.JPanel();
         jCheckBox4 = new javax.swing.JCheckBox();
         jRadioButton7 = new javax.swing.JRadioButton();
         jRadioButton8 = new javax.swing.JRadioButton();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<String>();
         jTextField4 = new javax.swing.JTextField();
-        jComboBox10 = new javax.swing.JComboBox<>();
+        jComboBox10 = new javax.swing.JComboBox<String>();
         jPanel12 = new javax.swing.JPanel();
         jCheckBox5 = new javax.swing.JCheckBox();
         jRadioButton9 = new javax.swing.JRadioButton();
         jRadioButton10 = new javax.swing.JRadioButton();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<String>();
         jTextField5 = new javax.swing.JTextField();
-        jComboBox11 = new javax.swing.JComboBox<>();
+        jComboBox11 = new javax.swing.JComboBox<String>();
         jPanel13 = new javax.swing.JPanel();
         jCheckBox6 = new javax.swing.JCheckBox();
         jRadioButton11 = new javax.swing.JRadioButton();
         jRadioButton12 = new javax.swing.JRadioButton();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<String>();
         jTextField6 = new javax.swing.JTextField();
-        jComboBox12 = new javax.swing.JComboBox<>();
+        jComboBox12 = new javax.swing.JComboBox<String>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList1 = new javax.swing.JList<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
@@ -145,7 +145,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.setLayout(new java.awt.GridLayout(6, 0, 0, 5));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "categorie", "pegi", "disponibilite", "serie", "note >", "note <", "note =" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -159,7 +159,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
             }
         });
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
         jComboBox7.setEnabled(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -239,7 +239,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel9.add(jRadioButton4, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "categorie", "pegi", "disponibilite", "serie", "note >", "note <", "note =" }));
         jComboBox2.setEnabled(false);
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +265,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 12);
         jPanel9.add(jTextField2, gridBagConstraints);
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
         jComboBox8.setEnabled(false);
         jPanel9.add(jComboBox8, new java.awt.GridBagConstraints());
 
@@ -321,7 +321,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel10.add(jRadioButton6, gridBagConstraints);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "categorie", "pegi", "disponibilite", "serie", "note >", "note <", "note =" }));
         jComboBox3.setEnabled(false);
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,7 +347,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 12);
         jPanel10.add(jTextField3, gridBagConstraints);
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
         jComboBox9.setEnabled(false);
         jPanel10.add(jComboBox9, new java.awt.GridBagConstraints());
 
@@ -403,7 +403,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel11.add(jRadioButton8, gridBagConstraints);
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "categorie", "pegi", "disponibilite", "serie", "note >", "note <", "note =" }));
         jComboBox4.setEnabled(false);
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,7 +429,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 12);
         jPanel11.add(jTextField4, gridBagConstraints);
 
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
+        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
         jComboBox10.setEnabled(false);
         jPanel11.add(jComboBox10, new java.awt.GridBagConstraints());
 
@@ -485,7 +485,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel12.add(jRadioButton10, gridBagConstraints);
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "categorie", "pegi", "disponibilite", "serie", "note >", "note <", "note =" }));
         jComboBox5.setEnabled(false);
         jComboBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,7 +511,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 12);
         jPanel12.add(jTextField5, gridBagConstraints);
 
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
+        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
         jComboBox11.setEnabled(false);
         jPanel12.add(jComboBox11, new java.awt.GridBagConstraints());
 
@@ -567,7 +567,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel13.add(jRadioButton12, gridBagConstraints);
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "categorie", "pegi", "date de parution", "disponibilite", "serie", "note >", "note <", "note =" }));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "categorie", "pegi", "disponibilite", "serie", "note >", "note <", "note =" }));
         jComboBox6.setEnabled(false);
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -593,7 +593,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 12);
         jPanel13.add(jTextField6, gridBagConstraints);
 
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
+        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "rts", "multijoueur", "fps", "moba", "enfant", "adulte", "p2w", "meuporg", "solo", "aventure" }));
         jComboBox12.setEnabled(false);
         jPanel13.add(jComboBox12, new java.awt.GridBagConstraints());
 
