@@ -987,7 +987,7 @@ public class RechercheUtilisateur extends javax.swing.JFrame implements Observer
             JTextField jmail = new JTextField(10);
             JLabel jl2 = new JLabel();
             jl2.setText("Avis:");
-            JTextArea javis = new JTextArea(30,30);
+            JTextArea javis = new JTextArea(20,20);
             
             
             top.add(jl);
